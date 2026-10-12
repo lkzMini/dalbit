@@ -1,146 +1,36 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>한글 0→Hero</title>
-<style>
-:root{--bg:#f7f5ef;--card:#fff;--tx:#1d1d22;--mu:#6b6b76;--ac:#e8453c;--ac2:#2b6cb0;--ok:#2f9e5b;--bd:#e2ded3}
-[data-theme=dark]{--bg:#14151a;--card:#1d1f27;--tx:#ececf1;--mu:#9a9aa8;--ac:#ff6b60;--ac2:#4a8de0;--ok:#4cc784;--bd:#2d303b}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,"Noto Sans KR","Malgun Gothic",sans-serif;background:var(--bg);color:var(--tx)}
-header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--bd)}
-h1{font-size:1.25rem;margin:0}h2{font-size:1.05rem;margin:.2rem 0 .6rem}
-button{font:inherit;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;cursor:pointer}
-button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-nav,#lv,.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-main{max-width:860px;margin:0 auto;padding:16px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px}
-.g{text-align:center;padding:8px;border:1px solid var(--bd);border-radius:10px}
-.g b{display:block;font-size:1.6rem}.g small{display:block;color:var(--mu);font-size:.75rem}
-#txt{font-size:2rem;line-height:1.7;word-break:keep-all;margin:6px 0}
-#txt span{color:var(--mu);border-bottom:3px solid transparent}
-#txt .d{color:var(--ok)}#txt .c{color:var(--tx);border-color:var(--ac)}
-#txt.sk{animation:sk .25s}@keyframes sk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-#rom{color:var(--ac2);font-size:1.05rem}#tr{color:var(--mu)}
-#trk{position:relative;height:44px;border-bottom:3px dashed var(--bd);margin:10px 0}
-#man{position:absolute;bottom:0;left:0;font-size:2rem;transition:left .25s,transform .15s}
-#flag{position:absolute;right:0;bottom:0;font-size:1.7rem}
-.r{display:flex;justify-content:center;gap:5px;margin:5px 0}
-.k{font-style:normal;position:relative;width:min(48px,8.5vw);height:min(48px,8.5vw);display:flex;align-items:center;justify-content:center;border:1px solid var(--bd);border-radius:8px;background:var(--card);font-size:1.15rem;cursor:pointer;user-select:none}
-.k small{position:absolute;right:3px;bottom:1px;font-size:.55rem;color:var(--mu)}
-.k sub{position:absolute;left:3px;top:1px;font-size:.6rem;color:var(--mu)}
-.k.nx{background:var(--ac2);color:#fff;border-color:var(--ac2)}.nx small,.nx sub{color:#fff}
-.k.fl{background:var(--ok);color:#fff}.k.bad{background:var(--ac);color:#fff}
-#msg{color:var(--ok);font-weight:600;min-height:1.4em}
-label{font-size:.9rem;color:var(--mu)}ul{margin:.3rem 0;padding-left:1.2rem}
-</style></head><body>
-<header>
-<h1>한글 <span style="color:var(--ac)">0→Hero</span></h1>
-<nav><button data-t="learn" class="on" data-i="learn"></button><button data-t="practice" data-i="practice"></button></nav>
-<div class="bar"><button id="lang" title="Language / Idioma"></button><button id="th" title="Theme"></button></div>
-</header>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<header><div class="hd"><div class="logo"><i>한</i>한글 0→Hero</div>
+<nav class="pill"><button data-t="learn" class="on" data-i="learn"></button><button data-t="practice" data-i="practice"></button></nav>
+<div class="bar"><button class="ib" id="lang" title="Idioma / Language"></button><button class="ib" id="th" title="Tema / Theme"></button></div></div></header>
 <main>
 <section id="learn">
-<div class="card"><h2 data-i="road"></h2><ul id="road"></ul></div>
-<div class="card"><h2 data-i="blk"></h2><p data-i="blkT"></p><p style="font-size:1.6rem">한 = ㅎ + ㅏ + ㄴ → han</p></div>
-<div class="card"><h2 data-i="vow"></h2><div class="grid" id="V"></div></div>
-<div class="card"><h2 data-i="con"></h2><div class="grid" id="C"></div><p><small data-i="keyH"></small></p></div>
-<div class="card"><h2 data-i="tipsT"></h2><ul id="tips"></ul></div>
+<div class="hero"><div><h2 data-i="hT"></h2><p data-i="hP"></p><button class="cta" id="go" data-i="cta"></button></div>
+<div><button class="syl go" id="syl" type="button" aria-label="ㅎ + ㅏ + ㄴ = 한"><i class="s1">ㅎ</i><i class="s2">ㅏ</i><i class="s3">ㄴ</i></button><p class="mu cap">ㅎ + ㅏ + ㄴ = 한 · han<br><span data-i="tap"></span></p></div></div>
+<h3 data-i="road"></h3><div id="road"></div>
+<h3 data-i="alpha"></h3><div class="seg" id="seg"><button class="on" data-a="V" data-i="vow"></button><button data-a="C" data-i="con"></button></div>
+<div class="grid" id="G"></div><p class="mu" data-i="keyH"></p>
+<h3 data-i="tipsT"></h3><ul class="tips" id="tips"></ul>
 </section>
+<section id="lesson" class="card lesson" hidden tabindex="-1"></section>
 <section id="practice" hidden>
-<div id="lv"></div>
-<div class="card" style="margin-top:12px">
-<div id="trk"><span id="man">🚶</span><span id="flag">🏁</span></div>
-<div id="txt"></div><div id="rom"></div><div id="tr"></div><div id="msg"></div>
-<div class="bar" style="margin-top:8px"><button id="nx" data-i="next"></button><button id="sp" data-i="listen"></button>
-<label><input type="checkbox" id="ckb"> <span data-i="kb"></span></label><label><input type="checkbox" id="crm"> <span data-i="romL"></span></label></div>
-<p id="st" style="color:var(--mu);font-size:.9rem"></p>
-</div>
-<div class="card" id="kbw"><div id="kb"></div><p style="text-align:center;margin:4px"><small data-i="hint"></small></p></div>
+<div class="seg" id="lv"></div>
+<div class="card" id="stage" tabindex="0" aria-label="Práctica de escritura / Typing practice"><div class="top"><span id="cnt"></span><div class="pb"><i id="pbar"></i></div><span id="combo"></span></div>
+<div id="trk"><div id="man"><b>🚶</b></div><span id="flag">🏁</span></div>
+<div id="txt"></div><div id="brk"></div><div id="rom"></div><div id="tr"></div><div id="msg" role="status" aria-live="polite"></div>
+<div class="bar" style="margin-top:8px"><button class="cta" id="nx" data-i="next"></button><button class="ghost" id="sp" data-i="listen"></button>
+<label class="sw"><input type="checkbox" id="ckb"><span data-i="kb"></span></label><label class="sw"><input type="checkbox" id="crm"><span data-i="romL"></span></label></div></div>
+<div class="stats"><div><b id="s1"></b><small data-i="cmp"></small></div><div><b id="s2"></b><small data-i="err"></small></div><div><b id="s3"></b><small data-i="acc"></small></div></div>
+<div class="card" id="kbw"><div id="kb"></div><div class="lg"><span class="c" data-i="con"></span><span class="v" data-i="vow"></span></div><p class="mu" style="text-align:center;margin:8px 0 0" data-i="hint"></p></div>
 </section>
 </main>
-<script>
-const $=s=>document.querySelector(s),ld=(k,d)=>{try{return localStorage.getItem(k)||d}catch{return d}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
-let lang=ld("lang",navigator.language.startsWith("es")?"es":"en"),theme=ld("theme",matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"),showKb=ld("kb","1")=="1",showRom=ld("rom","1")=="1";
-const UI={es:{learn:"Aprender",practice:"Practicar",road:"Tu ruta de 0 a Hero",blk:"Cómo se arma una sílaba",blkT:"Cada bloque Hangul = consonante + vocal (+ consonante final).",vow:"Vocales",con:"Consonantes",keyH:"⌨ = tecla a presionar en un teclado QWERTY normal.",tipsT:"Consejos",next:"Siguiente ▸",listen:"🔊 Escuchar",kb:"Teclado en pantalla",romL:"Romanización",hint:"Escribe con tu teclado físico o toca las teclas. Cada letra (jamo) va en orden; la web arma las sílabas.",err:"Errores",acc:"Precisión",cmp:"Completados",good:"🎉 ¡Excelente!",
-road_:["Nivel 1 · Letras: cada vocal y consonante.","Nivel 2 · Palabras: letras unidas en sílabas.","Nivel 3 · Frases: saludos y expresiones diarias.","Nivel 4 · Oraciones: gramática básica en acción.","Nivel 5 · Textos largos: lectura y escritura sostenida."],
-tips:["No necesitas teclado coreano instalado: funciona con tu teclado normal.","Usa Shift para ㄲ ㄸ ㅃ ㅆ ㅉ ㅒ ㅖ.","Las vocales compuestas se escriben en dos pasos (ㅘ = ㅗ + ㅏ).","10 minutos diarios valen más que una maratón semanal."]},
-en:{learn:"Learn",practice:"Practice",road:"Your 0-to-Hero path",blk:"How a syllable is built",blkT:"Each Hangul block = consonant + vowel (+ final consonant).",vow:"Vowels",con:"Consonants",keyH:"⌨ = key to press on a regular QWERTY keyboard.",tipsT:"Tips",next:"Next ▸",listen:"🔊 Listen",kb:"On-screen keyboard",romL:"Romanization",hint:"Type with your physical keyboard or tap the keys. Type each letter (jamo) in order; the site builds the syllables.",err:"Errors",acc:"Accuracy",cmp:"Completed",good:"🎉 Great job!",
-road_:["Level 1 · Letters: every vowel and consonant.","Level 2 · Words: letters joined into syllables.","Level 3 · Phrases: greetings and daily expressions.","Level 4 · Sentences: basic grammar in action.","Level 5 · Long texts: sustained reading and typing."],
-tips:["You don't need a Korean keyboard installed: it works with your normal one.","Use Shift for ㄲ ㄸ ㅃ ㅆ ㅉ ㅒ ㅖ.","Compound vowels take two steps (ㅘ = ㅗ + ㅏ).","10 minutes a day beats one weekly marathon."]}};
-// [ko, romanization, es, en]
-const DATA=[
-{es:"Letras",en:"Letters",items:[
-["ㅏ ㅑ ㅓ ㅕ ㅗ ㅛ ㅜ ㅠ ㅡ ㅣ","a ya eo yeo o yo u yu eu i","Las 10 vocales básicas","The 10 basic vowels"],
-["ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅎ","g n d r m b s ng j h","Consonantes básicas","Basic consonants"],
-["ㅋ ㅌ ㅍ ㅊ ㄲ ㄸ ㅃ ㅆ ㅉ","k t p ch kk tt pp ss jj","Consonantes aspiradas y tensas","Aspirated and tense consonants"],
-["가 나 다 라 마 바 사 아 자 하","ga na da ra ma ba sa a ja ha","Primeras sílabas","First syllables"],
-["ㅐ ㅔ ㅘ ㅝ ㅢ","ae e wa wo ui","Vocales compuestas","Compound vowels"]]},
-{es:"Palabras",en:"Words",items:[
-["나무","namu","árbol","tree"],["바다","bada","mar","sea"],["사과","sagwa","manzana","apple"],["물","mul","agua","water"],["고양이","goyangi","gato","cat"],
-["학교","hakgyo","escuela","school"],["한국","hanguk","Corea","Korea"],["커피","keopi","café","coffee"],["사랑","sarang","amor","love"],["친구","chingu","amigo/a","friend"]]},
-{es:"Frases",en:"Phrases",items:[
-["안녕하세요","annyeonghaseyo","Hola","Hello"],["감사합니다","gamsahamnida","Gracias","Thank you"],["죄송합니다","joesonghamnida","Lo siento","I'm sorry"],
-["만나서 반갑습니다","mannaseo bangapseumnida","Mucho gusto","Nice to meet you"],["잘 지내요?","jal jinaeyo?","¿Cómo estás?","How are you?"],
-["맛있어요","masisseoyo","Está delicioso","It's delicious"],["화장실이 어디예요?","hwajangsiri eodiyeyo?","¿Dónde está el baño?","Where is the bathroom?"]]},
-{es:"Oraciones",en:"Sentences",items:[
-["저는 학생이에요.","jeoneun haksaengieyo.","Soy estudiante.","I am a student."],
-["저는 한국어를 공부해요.","jeoneun hangugeoreul gongbuhaeyo.","Estudio coreano.","I study Korean."],
-["오늘 날씨가 좋아요.","oneul nalssiga joayo.","Hoy hace buen tiempo.","The weather is nice today."],
-["커피 한 잔 주세요.","keopi han jan juseyo.","Un café, por favor.","One coffee, please."],
-["내일 친구를 만나요.","naeil chingureul mannayo.","Mañana veo a un amigo.","I meet a friend tomorrow."],
-["저는 김치를 좋아해요.","jeoneun gimchireul joahaeyo.","Me gusta el kimchi.","I like kimchi."]]},
-{es:"Textos largos",en:"Long texts",items:[
-["안녕하세요? 제 이름은 민수예요. 저는 서울에 살아요. 저는 학생이고 한국어를 공부해요. 만나서 반갑습니다!","annyeonghaseyo? je ireumeun minsuyeyo. jeoneun seoure sarayo. jeoneun haksaengigo hangugeoreul gongbuhaeyo. mannaseo bangapseumnida!","¿Hola? Me llamo Minsu. Vivo en Seúl. Soy estudiante y estudio coreano. ¡Mucho gusto!","Hello? My name is Minsu. I live in Seoul. I'm a student and I study Korean. Nice to meet you!"],
-["오늘은 주말이에요. 아침에 커피를 마셔요. 오후에 친구를 만나요. 우리는 같이 영화를 봐요. 정말 재미있어요!","oneureun jumarieyo. achime keopireul masyeoyo. ohue chingureul mannayo. urineun gachi yeonghwareul bwayo. jeongmal jaemiisseoyo!","Hoy es fin de semana. Por la mañana tomo café. Por la tarde veo a un amigo. Vemos una película juntos. ¡Es muy divertido!","Today is the weekend. In the morning I drink coffee. In the afternoon I meet a friend. We watch a movie together. It's really fun!"]]}];
-// ---- Hangul engine: decompose text into the keys to press (2-set / dubeolsik) ----
-const Ls="ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ",Vs="ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ",Ts=["","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
-const SP={"ㅘ":"ㅗㅏ","ㅙ":"ㅗㅐ","ㅚ":"ㅗㅣ","ㅝ":"ㅜㅓ","ㅞ":"ㅜㅔ","ㅟ":"ㅜㅣ","ㅢ":"ㅡㅣ","ㄳ":"ㄱㅅ","ㄵ":"ㄴㅈ","ㄶ":"ㄴㅎ","ㄺ":"ㄹㄱ","ㄻ":"ㄹㅁ","ㄼ":"ㄹㅂ","ㄽ":"ㄹㅅ","ㄾ":"ㄹㅌ","ㄿ":"ㄹㅍ","ㅀ":"ㄹㅎ","ㅄ":"ㅂㅅ"};
-const ROWS=[["qwertyuiop","ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔ"],["asdfghjkl","ㅁㄴㅇㄹㅎㅗㅓㅏㅣ"],["zxcvbnm","ㅋㅌㅊㅍㅠㅜㅡ"]];
-const SH={Q:"ㅃ",W:"ㅉ",E:"ㄸ",R:"ㄲ",T:"ㅆ",O:"ㅒ",P:"ㅖ"};
-const J2K={};ROWS.forEach(([k,j])=>[...k].forEach((c,i)=>J2K[j[i]]=c));for(const k in SH)J2K[SH[k]]=k;
-const jk=j=>[...(SP[j]||j)].map(x=>J2K[x]);
-const units=s=>[...s].map(ch=>{const n=ch.charCodeAt(0)-44032;let k=[];
- if(n>=0&&n<11172)k=[...jk(Ls[n/588|0]),...jk(Vs[(n%588)/28|0]),...(n%28?jk(Ts[n%28]):[])];
- else if(J2K[ch]||SP[ch])k=jk(ch);return{ch,k}});
-// ---- State ----
-const S={lv:0,i:0,u:[],p:0,k:0,err:0,hit:0,done:0,n:0,tot:1,sh:false};let tm;
-const skip=()=>{while(S.p<S.u.length&&!S.u[S.p].k.length)S.p++};
-function load(){clearTimeout(tm);S.it=DATA[S.lv].items[S.i];S.u=units(S.it[0]);S.p=0;S.k=0;S.n=0;skip();S.tot=S.u.reduce((a,x)=>a+x.k.length,0)||1;$("#msg").textContent="";render()}
-function next(){S.i=(S.i+1)%DATA[S.lv].items.length;load()}
-function render(){const it=S.it;if(!it)return;
- $("#txt").innerHTML=S.u.map((x,i)=>`<span class="${i<S.p?"d":i==S.p?"c":""}">${x.ch==" "?"&nbsp;":x.ch}</span>`).join("");
- $("#rom").textContent=showRom?it[1]:"";$("#tr").textContent=it[lang=="es"?2:3];
- $("#man").style.left=`calc((100% - 2.4rem) * ${S.n/S.tot})`;$("#man").style.transform=`rotate(${S.n%2?-8:8}deg)`;
- $("#kbw").hidden=!showKb;document.querySelectorAll(".k").forEach(e=>e.classList.remove("nx"));
- const need=S.u[S.p]?.k[S.k];if(need){document.querySelector(`.k[data-k="${need.toLowerCase()}"]`)?.classList.add("nx");if(need!==need.toLowerCase()||S.sh)document.querySelector('.k[data-k="⇧"]')?.classList.toggle("nx",need!==need.toLowerCase())}
- stats()}
-function stats(){const t=S.hit+S.err;$("#st").textContent=`${UI[lang].cmp}: ${S.done} · ${UI[lang].err}: ${S.err} · ${UI[lang].acc}: ${t?Math.round(S.hit/t*100):100}%`}
-function flash(l,ok){const e=document.querySelector(`.k[data-k="${l.toLowerCase()}"]`);if(!e)return;e.classList.add(ok?"fl":"bad");setTimeout(()=>e.classList.remove("fl","bad"),160)}
-function press(l){if(S.p>=S.u.length)return;
- if(S.sh&&SH[l.toUpperCase()])l=l.toUpperCase();S.sh=false;document.querySelector('.k[data-k="⇧"]')?.classList.remove("fl");
- const need=S.u[S.p].k[S.k],ok=l===need;flash(l,ok);
- if(ok){S.hit++;S.n++;S.k++;if(S.k>=S.u[S.p].k.length){S.p++;S.k=0;skip()}
-  render();if(S.p>=S.u.length){S.done++;$("#msg").textContent=UI[lang].good;stats();tm=setTimeout(next,1400)}}
- else{S.err++;$("#txt").classList.add("sk");setTimeout(()=>$("#txt").classList.remove("sk"),250);stats()}}
-// ---- UI ----
-function learn(){const g=(s,t)=>$(t).innerHTML=s.split(" ").map(x=>{const[j,r]=x.split(":"),k=J2K[j];return`<div class="g"><b>${j}</b><small>${r}</small><small>⌨ ${k==k.toUpperCase()?"⇧+":""}${k.toUpperCase()}</small></div>`}).join("");
- g("ㅏ:a ㅑ:ya ㅓ:eo ㅕ:yeo ㅗ:o ㅛ:yo ㅜ:u ㅠ:yu ㅡ:eu ㅣ:i ㅐ:ae ㅔ:e","#V");
- g("ㄱ:g/k ㄴ:n ㄷ:d/t ㄹ:r/l ㅁ:m ㅂ:b/p ㅅ:s ㅇ:ng ㅈ:j ㅊ:ch ㅋ:k ㅌ:t ㅍ:p ㅎ:h ㄲ:kk ㄸ:tt ㅃ:pp ㅆ:ss ㅉ:jj","#C");
- $("#road").innerHTML=UI[lang].road_.map(x=>`<li>${x}</li>`).join("");$("#tips").innerHTML=UI[lang].tips.map(x=>`<li>${x}</li>`).join("")}
-function tr(){document.documentElement.lang=lang;document.documentElement.dataset.theme=theme;
- document.querySelectorAll("[data-i]").forEach(e=>e.textContent=UI[lang][e.dataset.i]);
- $("#lang").textContent="🌐 "+lang.toUpperCase();$("#th").textContent=theme=="dark"?"☀️":"🌙";$("#ckb").checked=showKb;$("#crm").checked=showRom;
- $("#lv").innerHTML=DATA.map((l,i)=>`<button data-l="${i}" class="${i==S.lv?"on":""}">${i+1}. ${l[lang]}</button>`).join("");learn();render()}
-$("#kb").innerHTML=ROWS.map((r,ri)=>`<div class="r">${ri==2?'<i class="k" data-k="⇧">⇧</i>':""}${[...r[0]].map((c,i)=>`<i class="k" data-k="${c}">${r[1][i]}${SH[c.toUpperCase()]?`<sub>${SH[c.toUpperCase()]}</sub>`:""}<small>${c.toUpperCase()}</small></i>`).join("")}</div>`).join("");
-$("#kb").onclick=e=>{const k=e.target.closest(".k");if(!k)return;if(k.dataset.k=="⇧"){S.sh=!S.sh;k.classList.toggle("fl",S.sh)}else press(k.dataset.k)};
-document.querySelector("nav").onclick=e=>{const t=e.target.dataset.t;if(!t)return;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b==e.target));$("#learn").hidden=t!="learn";$("#practice").hidden=t!="practice";if(t=="practice"&&!S.it)load()};
-$("#lv").onclick=e=>{const l=e.target.dataset.l;if(l==null)return;S.lv=+l;S.i=0;e.target.blur();tr();load()};
-$("#lang").onclick=()=>{lang=lang=="es"?"en":"es";sv("lang",lang);tr()};
-$("#th").onclick=()=>{theme=theme=="dark"?"light":"dark";sv("theme",theme);tr()};
-$("#ckb").onchange=e=>{showKb=e.target.checked;sv("kb",+showKb);render()};
-$("#crm").onchange=e=>{showRom=e.target.checked;sv("rom",+showRom);render()};
-$("#nx").onclick=next;$("#sp").onclick=()=>{try{speechSynthesis.cancel();speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(S.it[0]),{lang:"ko-KR",rate:.8}))}catch{}};
-addEventListener("keydown",e=>{if($("#practice").hidden||e.ctrlKey||e.metaKey||e.altKey||!/^Key[A-Z]$/.test(e.code))return;e.preventDefault();
- let l=e.code[3].toLowerCase();if(e.shiftKey&&SH[l.toUpperCase()])l=l.toUpperCase();press(l)});
-tr();
-</script></body></html>
+<script defer src="js/data.js"></script>
+<script defer src="js/engine.js"></script>
+<script defer src="js/progress.js"></script>
+<script defer src="js/navigation.js"></script>
+<script defer src="js/app.js"></script>
+
+</body></html>

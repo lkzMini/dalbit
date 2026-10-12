@@ -1,0 +1,192 @@
+[
+  [
+    [
+      "ㅏ ㅑ ㅓ ㅕ ㅗ ㅛ ㅜ ㅠ ㅡ ㅣ",
+      "a ya eo yeo o yo u yu eu i",
+      "Las 10 vocales básicas",
+      "The 10 basic vowels"
+    ],
+    [
+      "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅎ",
+      "g n d r m b s ng j h",
+      "Consonantes básicas",
+      "Basic consonants"
+    ],
+    [
+      "ㅋ ㅌ ㅍ ㅊ ㄲ ㄸ ㅃ ㅆ ㅉ",
+      "k t p ch kk tt pp ss jj",
+      "Consonantes aspiradas y tensas",
+      "Aspirated and tense consonants"
+    ],
+    [
+      "가 나 다 라 마 바 사 아 자 하",
+      "ga na da ra ma ba sa a ja ha",
+      "Primeras sílabas",
+      "First syllables"
+    ],
+    [
+      "ㅐ ㅔ ㅘ ㅝ ㅢ",
+      "ae e wa wo ui",
+      "Vocales compuestas",
+      "Compound vowels"
+    ]
+  ],
+  [
+    [
+      "나무",
+      "namu",
+      "árbol",
+      "tree"
+    ],
+    [
+      "바다",
+      "bada",
+      "mar",
+      "sea"
+    ],
+    [
+      "사과",
+      "sagwa",
+      "manzana",
+      "apple"
+    ],
+    [
+      "물",
+      "mul",
+      "agua",
+      "water"
+    ],
+    [
+      "고양이",
+      "goyangi",
+      "gato",
+      "cat"
+    ],
+    [
+      "학교",
+      "hakgyo",
+      "escuela",
+      "school"
+    ],
+    [
+      "한국",
+      "hanguk",
+      "Corea",
+      "Korea"
+    ],
+    [
+      "커피",
+      "keopi",
+      "café",
+      "coffee"
+    ],
+    [
+      "사랑",
+      "sarang",
+      "amor",
+      "love"
+    ],
+    [
+      "친구",
+      "chingu",
+      "amigo/a",
+      "friend"
+    ]
+  ],
+  [
+    [
+      "안녕하세요",
+      "annyeonghaseyo",
+      "Hola",
+      "Hello"
+    ],
+    [
+      "감사합니다",
+      "gamsahamnida",
+      "Gracias",
+      "Thank you"
+    ],
+    [
+      "죄송합니다",
+      "joesonghamnida",
+      "Lo siento",
+      "I'm sorry"
+    ],
+    [
+      "만나서 반갑습니다",
+      "mannaseo bangapseumnida",
+      "Mucho gusto",
+      "Nice to meet you"
+    ],
+    [
+      "잘 지내요?",
+      "jal jinaeyo?",
+      "¿Cómo estás?",
+      "How are you?"
+    ],
+    [
+      "맛있어요",
+      "masisseoyo",
+      "Está delicioso",
+      "It's delicious"
+    ],
+    [
+      "화장실이 어디예요?",
+      "hwajangsiri eodiyeyo?",
+      "¿Dónde está el baño?",
+      "Where is the bathroom?"
+    ]
+  ],
+  [
+    [
+      "저는 학생이에요.",
+      "jeoneun haksaengieyo.",
+      "Soy estudiante.",
+      "I am a student."
+    ],
+    [
+      "저는 한국어를 공부해요.",
+      "jeoneun hangugeoreul gongbuhaeyo.",
+      "Estudio coreano.",
+      "I study Korean."
+    ],
+    [
+      "오늘 날씨가 좋아요.",
+      "oneul nalssiga joayo.",
+      "Hoy hace buen tiempo.",
+      "The weather is nice today."
+    ],
+    [
+      "커피 한 잔 주세요.",
+      "keopi han jan juseyo.",
+      "Un café, por favor.",
+      "One coffee, please."
+    ],
+    [
+      "내일 친구를 만나요.",
+      "naeil chingureul mannayo.",
+      "Mañana veo a un amigo.",
+      "I meet a friend tomorrow."
+    ],
+    [
+      "저는 김치를 좋아해요.",
+      "jeoneun gimchireul joahaeyo.",
+      "Me gusta el kimchi.",
+      "I like kimchi."
+    ]
+  ],
+  [
+    [
+      "안녕하세요? 제 이름은 민수예요. 저는 서울에 살아요. 저는 학생이고 한국어를 공부해요. 만나서 반갑습니다!",
+      "annyeonghaseyo? je ireumeun minsuyeyo. jeoneun seoure sarayo. jeoneun haksaengigo hangugeoreul gongbuhaeyo. mannaseo bangapseumnida!",
+      "¿Hola? Me llamo Minsu. Vivo en Seúl. Soy estudiante y estudio coreano. ¡Mucho gusto!",
+      "Hello? My name is Minsu. I live in Seoul. I'm a student and I study Korean. Nice to meet you!"
+    ],
+    [
+      "오늘은 주말이에요. 아침에 커피를 마셔요. 오후에 친구를 만나요. 우리는 같이 영화를 봐요. 정말 재미있어요!",
+      "oneureun jumarieyo. achime keopireul masyeoyo. ohue chingureul mannayo. urineun gachi yeonghwareul bwayo. jeongmal jaemiisseoyo!",
+      "Hoy es fin de semana. Por la mañana tomo café. Por la tarde veo a un amigo. Vemos una película juntos. ¡Es muy divertido!",
+      "Today is the weekend. In the morning I drink coffee. In the afternoon I meet a friend. We watch a movie together. It's really fun!"
+    ]
+  ]
+]

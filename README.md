@@ -1,34 +1,41 @@
-# 한글 0→Hero — Aprende coreano desde cero
+# 한글 0→Hero
 
-Web estática de **un solo archivo** (`index.html`): sin dependencias, sin build, sin servidor, sin frameworks. Pesa ~20 KB y funciona offline.
+**Abrí `index.html` con doble clic y conservá la carpeta completa.** No requiere instalación, framework, build ni servidor. También funciona por HTTP; subí toda la carpeta si lo publicás.
 
-## Qué incluye
-- **Aprender**: ruta 0→Hero, cómo se arma una sílaba, tablas de vocales/consonantes (con la tecla a presionar) y consejos.
-- **Practicar** (minijuego): aparece texto en Hangul + romanización + traducción. Mientras escribes, el 🚶 camina hacia la 🏁. Teclado en pantalla que resalta la próxima tecla (con Shift cuando hace falta).
-- **5 niveles**: Letras → Palabras → Frases → Oraciones → Textos largos.
-- **Modo Claro/Oscuro** (respeta tu sistema por defecto) e **idioma ES/EN** (se guardan en tu navegador).
-- Botón 🔊 para escuchar la pronunciación (voz coreana del navegador/sistema, si está disponible).
+## Aprender y practicar
 
-## Cómo funciona escribir (importante)
-No necesitas teclado coreano instalado. La web usa la distribución estándar coreana (두벌식): tú presionas la tecla física de cada letra (jamo) **en orden** y la web arma las sílabas. Vocales compuestas = 2 pasos (ㅘ = ㅗ + ㅏ). Shift para ㄲ ㄸ ㅃ ㅆ ㅉ ㅒ ㅖ. En móvil puedes tocar el teclado en pantalla.
+- **Aprender:** cinco tarjetas abren introducciones legibles ES/EN, con explicaciones cortas, ejemplos y audio opcional. Podés volver o elegir **Practicar este nivel**. El historial del navegador permite volver atrás.
+- **Practicar:** conserva los 30 ejercicios, cinco niveles, caminante, teclado guiado y animaciones. El desglose muestra los jamo de cada bloque.
+- Idioma, tema, teclado y romanización conservan sus preferencias. Los ejercicios únicos completados se guardan por ID; errores/aciertos de la sesión no.
+- El progreso anterior (`prog`) se migra mediante un mapa explícito sin modificar esa clave. El nuevo formato usa `hangul-progress-v1`. Si el navegador bloquea almacenamiento, podés jugar, pero el progreso puede no persistir.
 
-## Paso a paso
-1. Descarga la carpeta `hangul-hero`.
-2. Abre `index.html` con doble clic. ¡Listo!
-3. (Opcional) Servidor local: `python -m http.server 8000` dentro de la carpeta y abre `http://localhost:8000`.
+## Cómo escribir
 
-## Publicarla gratis
-- **GitHub Pages**: sube `index.html` a un repo → Settings → Pages → rama `main`.
-- **Netlify / Cloudflare Pages**: arrastra la carpeta al panel. Sin configuración.
+Usá el teclado físico desde el área del ejercicio o tocá los botones en pantalla. Si el foco está en otro control, tocá el texto del ejercicio para volver a escribir. No necesitás instalar un teclado coreano: se verifican posiciones QWERTY (두벌식). Shift permite las letras dobles existentes; las vocales compuestas se dividen en pasos.
 
-## Agregar contenido (¡para practicar horas!)
-En `index.html`, busca `const DATA=[` y añade líneas a cualquier nivel con el formato:
+Es **escritura guiada**, no editor/IME de texto libre. Espacios y puntuación se saltan. Siguiente permite omitir; al completar avanza tras 1,5 segundos, salvo que salgas de Practicar. Sin intentos, precisión muestra «—».
 
-```js
-["한국어", "hangugeo", "idioma coreano", "Korean language"]
-// [texto Hangul, romanización, español, inglés]
+## Alcance
+
+Son introducciones, **no un curso completo ni evaluación de dominio**. Completar teclas no demuestra comprensión o pronunciación. El alfabeto inicial es una selección; romanización orientativa. El audio depende de una voz coreana del navegador/sistema y puede no estar disponible, incluso sin conexión. El almacenamiento de archivos locales depende del navegador y no necesariamente se comparte con la versión HTTP.
+
+## Organización y pruebas
+
+- `index.html` / `styles.css`: estructura y estética.
+- `js/data.js`: ejercicios con IDs estables, textos bilingües y lecciones.
+- `js/engine.js`: descomposición y mapa de teclas.
+- `js/progress.js`: validación, migración y almacenamiento tolerante a fallos.
+- `js/navigation.js`: rutas y reglas de captura del teclado.
+- `js/app.js`: controlador de interfaz.
+
+Scripts clásicos `defer`, sin `fetch` obligatorio ni módulos ES, para preservar `file://`. Pruebas de módulos puros con Node, sin dependencias:
+
+```sh
+node --test tests/core.test.cjs
 ```
-Puedes pegar textos tan largos como quieras; el motor descompone cualquier sílaba Hangul automáticamente. Para un nivel nuevo, agrega `{es:"Nombre",en:"Name",items:[...]}`.
 
-## Ideas para la v2
-Progreso guardado por nivel y rachas diarias, modo cronómetro (PPM), repaso espaciado, reconocimiento de gramática (partículas, conjugaciones), ejercicios de lectura con audio, PWA instalable y archivos de contenido JSON separados.
+Para agregar ejercicios, editá `js/data.js` y asigná un **ID nuevo y único**. Conservá el ID al reordenar. No cambies `ORIGINAL_IDS`: describe la versión histórica para migrar índices. Actualizá pruebas si ampliás contenido; el fixture conserva los 30 ejercicios originales.
+
+## Fuentes
+
+Explicaciones propias; estructura inicial/medial/final contrastada con [National Institute of Korean Language](https://www.korean.go.kr/eng_hangeul/principle/001.html). El [curso introductorio de King Sejong Institute](https://www.iksi.or.kr/lms/crse/crseApply.do?crseNo=119352) distingue consonantes, vocales y batchim, aprendizaje y ejercicios. Ejemplos y traducciones del prototipo se conservaron; no constituyen una revisión lingüística completa.
