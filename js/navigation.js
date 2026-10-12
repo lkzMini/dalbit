@@ -8,6 +8,7 @@ function parse(hash,levels){
  return {view:m[1],level};
 }
 function hash(view,level,levels){return view==="learn"?"#learn":"#"+view+"/"+levels[level].id;}
+function practiceRoute(route,allowed){return route.view==="practice"&&!allowed?{view:"lesson",level:route.level}:route;}
 function preferenceLanguage(value,fallback="es"){return value==="es"||value==="en"?value:fallback==="en"?"en":"es";}
 function practiceEntry(state,level,length){
  if(!state.loaded||state.level!==level)return {action:"load",index:0};
@@ -18,5 +19,5 @@ function capturesKey(event,view){
  if(view!=="practice"||event.ctrlKey||event.metaKey||event.altKey||event.isComposing||!/^Key[A-Z]$/.test(event.code))return false;
  return !event.target?.closest?.("button,input,textarea,select,a,[contenteditable], [role=button]");
 }
-return {parse,hash,capturesKey,preferenceLanguage,practiceEntry};
+return {parse,hash,capturesKey,preferenceLanguage,practiceEntry,practiceRoute};
 });

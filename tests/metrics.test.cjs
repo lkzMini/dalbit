@@ -70,7 +70,7 @@ test('quota pending deltas survive refresh and another tracker, clear only after
  assert.equal(b.snapshot().today.total,5);assert.equal(a.snapshot().today.total,5);
 });
 test('controller records each physical/touch evaluation exactly once; routes/render/Shift do not count',()=>{
- const nodes=new Map(),listeners={},s=storage();let now=local(2026,10,12);
+ const nodes=new Map(),listeners={},s=storage({'hangul-progress-v1':JSON.stringify({version:1,completed:['word-tree']})});let now=local(2026,10,12);
  class ClockDate extends Date{constructor(...args){super(...(args.length?args:[now.getTime()]))}}
  const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,dataset:{},style:{setProperty(){}},classList:{add(){},remove(){},toggle(){}},focus(){},appendChild(){},remove(){},setAttribute(){},offsetLeft:0,offsetWidth:0});return nodes.get(id)};
  const pills=[{dataset:{t:'learn'},classList:{toggle(){}},setAttribute(){}},{dataset:{t:'practice'},classList:{toggle(){}},setAttribute(){}}];

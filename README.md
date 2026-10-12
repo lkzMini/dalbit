@@ -5,9 +5,11 @@
 ## Aprender y practicar
 
 - **Aprender:** cinco tarjetas abren introducciones legibles ES/EN, con explicaciones cortas, ejemplos y audio opcional. Podés volver o elegir **Practicar este nivel**. El historial del navegador permite volver atrás.
-- **Practicar:** conserva los 30 ejercicios, cinco niveles, caminante, teclado guiado y animaciones. El desglose muestra los jamo de cada bloque.
+- **Practicar:** conserva los 30 ejercicios, cinco niveles, caminante, teclado guiado y animaciones. El desglose muestra los jamo de cada bloque. Incluye el resumen diario **Tu práctica**, no Aprender.
+- La primera entrada a cada nivel sin práctica registrada muestra su introducción, incluso desde pestañas, Practicar, enlaces directos o historial. **Practicar este nivel** habilita ese nivel; no hay cuenta regresiva ni bloqueos secuenciales. No se exige repetir la introducción si ese nivel ya tiene un ejercicio completado o un intento evaluado registrado.
 - Idioma, tema, teclado y romanización conservan sus preferencias. Los ejercicios únicos completados se guardan por ID; errores/aciertos de la sesión no.
 - El progreso anterior (`prog`) se migra mediante un mapa explícito sin modificar esa clave. El nuevo formato usa `hangul-progress-v1`. Si el navegador bloquea almacenamiento, podés jugar, pero el progreso puede no persistir.
+- `hangul-unit-access-v1` guarda por nivel la aceptación del botón y los nuevos intentos evaluados, separados de ejercicios completados. Visitar, escuchar o usar controles no registra práctica. No demuestra lectura ni comprensión; los intentos incompletos anteriores sin nivel registrado no se pueden reconstruir. Sin almacenamiento, esta habilitación dura solo la visita.
 
 ## Tu práctica
 

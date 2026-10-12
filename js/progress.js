@@ -29,5 +29,19 @@ function save(storage,completed,levels){return write(storage,KEY,JSON.stringify(
 function complete(completed,id,levels){return validate({version:1,completed:[...completed,id]},levels)}
 function count(completed,level){const known=new Set(completed);return level.items.filter(x=>known.has(x.id)).length}
 
-return {KEY,read,write,validate,migrate,load,save,complete,count};
+const ACCESS_KEY="hangul-unit-access-v1";
+function practiceAccess(storage,levels){
+ const ids=new Set(levels.map(l=>l.id));
+ const clean=value=>record(value)&&value.version===1?{
+  introduced:Array.isArray(value.introduced)?[...new Set(value.introduced.filter(id=>ids.has(id)))]:[],
+  practiced:Array.isArray(value.practiced)?[...new Set(value.practiced.filter(id=>ids.has(id)))]:[]
+ }:{introduced:[],practiced:[]};
+ let state=clean(decode(read(storage,ACCESS_KEY))),pending=false;
+ function refresh(){const saved=clean(decode(read(storage,ACCESS_KEY)));for(const kind of ["introduced","practiced"])state[kind]=[...new Set([...state[kind],...saved[kind]])]}
+ function mark(kind,id){if(!ids.has(id))return false;refresh();if(!state[kind].includes(id)){state[kind].push(id);pending=true}if(pending)pending=!write(storage,ACCESS_KEY,JSON.stringify({version:1,...state}));return true}
+ function canPractice(id,completed){refresh();const level=levels.find(l=>l.id===id);return !!level&&(state.introduced.includes(id)||state.practiced.includes(id)||count(completed,level)>0)}
+ return {canPractice,acknowledge:id=>mark("introduced",id),recordAttempt:id=>mark("practiced",id)};
+}
+
+return {KEY,ACCESS_KEY,read,write,validate,migrate,load,save,complete,count,practiceAccess};
 });
