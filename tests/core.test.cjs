@@ -49,9 +49,9 @@ test('physical typing ignores controls, modifiers, IME and nonpractice views',()
  for(const x of [{ctrlKey:true},{metaKey:true},{altKey:true},{isComposing:true},{code:'Enter'},{target:{closest:()=>({})}}])assert.equal(N.capturesKey({...e,...x},'practice'),false);
 });
 test('classic scripts work without CommonJS, imports or fetch',()=>{
- const c=vm.createContext({});for(const name of ['data','engine','progress','navigation'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../js',name+'.js'),'utf8'),c);
+ const c=vm.createContext({});for(const name of ['data','engine','progress','navigation','metrics'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../js',name+'.js'),'utf8'),c);
  assert.equal(c.Hangul.Data.DATA.length,5);assert.equal(c.Hangul.Engine.units('한')[0].k.join(''),'gks');
- const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');assert.equal((html.match(/<script defer src=/g)||[]).length,5);assert.ok(!html.includes('type="module"'));
+ const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');assert.equal((html.match(/<script defer src=/g)||[]).length,6);assert.ok(!html.includes('type="module"'));
 });
 test('language preferences whitelist ES/EN and reject inherited or corrupt keys',()=>{
  for(const lang of ['es','en'])assert.equal(N.preferenceLanguage(lang),lang);

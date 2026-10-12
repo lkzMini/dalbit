@@ -89,3 +89,5 @@ h3{font-size:1.2rem;margin:36px 0 12px}
 
 /* Keep each reading page tied to its category's original colour. */
 #lesson{border-top:4px solid var(--c)}
+
+#practice-summary{margin-top:24px}#practice-summary h3{margin:0 0 6px}.daily-row{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:8px;padding:10px 0;border-top:1px solid var(--bd);align-items:center}.daily-row small{display:block;color:var(--mu);font-size:.72rem;font-weight:400}.daily-row>span{text-align:center;font-weight:700}.daily-row .correct{color:var(--l1)}.daily-row .wrong{color:var(--l3)}.daily-row .accuracy{color:var(--l0)}

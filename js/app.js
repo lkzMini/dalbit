@@ -1,10 +1,11 @@
 (function(){"use strict";
-const {UI,DATA,LESSONS}=Hangul.Data,{units,ROWS,SH,J2K,K2J,VW,ALPHA}=Hangul.Engine,{Progress,Navigation}=Hangul;
+const {UI,DATA,LESSONS}=Hangul.Data,{units,ROWS,SH,J2K,K2J,VW,ALPHA}=Hangul.Engine,{Progress,Navigation,Metrics}=Hangul;
 const $=s=>document.querySelector(s);let storage;try{storage=localStorage}catch{storage=null}
 const ld=(k,d)=>Progress.read(storage,k)??d,sv=(k,v)=>Progress.write(storage,k,String(v));
 let lang=Navigation.preferenceLanguage(ld("lang",navigator.language.startsWith("es")?"es":"en"));
 let theme=ld("theme",matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");if(!["light","dark"].includes(theme))theme="light";
 let showKb=ld("kb","1")==="1",showRom=ld("rom","1")==="1",completed=Progress.load(storage,DATA,Hangul.Data.ORIGINAL_IDS);
+const metrics=Metrics.create(storage);
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const S={lv:0,i:0,u:[],p:0,k:0,err:0,hit:0,done:0,n:0,tot:1,sh:false,combo:0};let tm,al="V",view="learn",lessonLevel=0;
 const skip=()=>{while(S.p<S.u.length&&!S.u[S.p].k.length)S.p++},doneN=l=>Progress.count(completed,DATA[l]);
@@ -23,9 +24,9 @@ function render(){if(!S.it)return;const it=S.it,cu=S.u[S.p];
 function flash(l,ok){const e=document.querySelector(`.k[data-k="${l.toLowerCase()}"]`);if(!e)return;e.classList.add(ok?"fl":"bad");setTimeout(()=>e.classList.remove("fl","bad"),160)}
 function hop(){const m=$("#man");m.classList.remove("hop");void m.offsetWidth;m.classList.add("hop")}
 function boom(){const t=$("#trk"),x=$("#man").offsetLeft+20;for(let i=0;i<20;i++){const e=document.createElement("i");e.className="cf";e.style.cssText=`left:${x}px;--x:${Math.round((Math.random()-.5)*200)}px;--y:${-20-Math.round(Math.random()*50)}px;background:var(--l${i%4})`;t.appendChild(e);setTimeout(()=>e.remove(),900)}}
-function press(l){if(S.p>=S.u.length)return;
+function press(l){if(!Metrics.eligible(view,S.p,S.u.length,l))return;
  if(S.sh&&SH[l.toUpperCase()])l=l.toUpperCase();S.sh=false;document.querySelector('.k[data-k="⇧"]')?.setAttribute("aria-pressed","false");document.querySelector('.k[data-k="⇧"]')?.classList.remove("fl");
- const need=S.u[S.p].k[S.k],ok=l===need;flash(l,ok);
+ const need=S.u[S.p].k[S.k],ok=l===need;flash(l,ok);metrics.record(ok);practiceSummary();
  if(ok){S.hit++;S.n++;S.combo++;S.k++;if(S.k>=S.u[S.p].k.length){S.p++;S.k=0;skip()}hop();
   if(S.p>=S.u.length){S.done++;completed=Progress.complete(completed,S.it.id,DATA);Progress.save(storage,completed,DATA);$("#msg").textContent=UI[lang].good;boom();tabs();tm=setTimeout(()=>{if(view==="practice")next()},1500)}render()}
  else{S.err++;S.combo=0;$("#txt").classList.add("sk");setTimeout(()=>$("#txt").classList.remove("sk"),250);render()}}
@@ -36,9 +37,13 @@ function learn(){const G=$("#G");G.style.setProperty("--c",al=="V"?"var(--l0)":"
  G.innerHTML=ALPHA[al].split(" ").map(x=>{const[j,r]=x.split(":"),k=J2K[j];return`<button class="g" data-j="${j}"><b>${j}</b><span>${r}</span><small>⌨ ${k==k.toUpperCase()?"⇧+":""}${k.toUpperCase()}</small></button>`}).join("");
  document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.a==al));
  $("#tips").innerHTML=UI[lang].tips.map(x=>`<li>${x}</li>`).join("")}
+function practiceSummary(){
+ const summary=metrics.snapshot(),es=lang==="es",format=n=>n===null?"—":n.toLocaleString(lang,{maximumFractionDigits:1})+"%";
+ $("#practice-summary").innerHTML=`<h3>${es?"Tu práctica":"Your practice"}</h3><p class="mu">${es?"Teclas evaluadas; no mide dominio del idioma.":"Evaluated keys; not a measure of language mastery."}</p><div class="daily-grid">`+[[es?"Hoy":"Today",summary.todayKey,summary.today],[es?"Ayer":"Yesterday",summary.yesterdayKey,summary.yesterday]].map(([title,date,row])=>`<div class="daily-row"><b>${title}<small>${date}</small></b><span class="correct">${row.correct}<small>${es?"Aciertos":"Correct"}</small></span><span class="wrong">${row.wrong}<small>${es?"Fallos":"Wrong"}</small></span><span class="accuracy">${format(row.accuracy)}<small>${row.total?(es?"Precisión":"Accuracy"):(es?"Sin datos":"No data")}</small></span></div>`).join("")+`</div><p class="mu">${summary.delta===null?(es?"Sin comparación: ambos días necesitan intentos.":"No comparison: both days need attempts."):(es?"Hoy vs. ayer: ":"Today vs. yesterday: ")+(summary.delta>0?"+":"")+summary.delta.toLocaleString(lang,{maximumFractionDigits:1})+" pp · "+summary.today.total+(es?" intentos hoy / ":" attempts today / ")+summary.yesterday.total+(es?" ayer":" yesterday")}</p>`+(!summary.persistent?`<p class="mu">${es?"Almacenamiento no disponible: datos de esta visita.":"Storage unavailable: data for this visit."}</p>`:"");
+}
 function paint(){document.documentElement.lang=lang;document.documentElement.dataset.theme=theme;
  document.querySelectorAll("[data-i]").forEach(e=>e.textContent=UI[lang][e.dataset.i]);
- $("#lang").textContent=lang.toUpperCase();$("#th").textContent=theme=="dark"?"☀️":"🌙";$("#ckb").checked=showKb;$("#crm").checked=showRom;tabs();learn();render()}
+ $("#lang").textContent=lang.toUpperCase();$("#th").textContent=theme=="dark"?"☀️":"🌙";$("#ckb").checked=showKb;$("#crm").checked=showRom;tabs();learn();render();practiceSummary()}
 function lesson(){
  const level=DATA[lessonLevel],content=LESSONS[lessonLevel][lang],byId=new Map(DATA.flatMap(l=>l.items).map(x=>[x.id,x]));
  const e=$("#lesson");e.style.setProperty("--c",`var(--l${lessonLevel})`);
@@ -54,7 +59,7 @@ function applyRoute(){
  document.querySelectorAll(".pill button").forEach(b=>{const active=b.dataset.t===(view==="lesson"?"learn":view);b.classList.toggle("on",active);b.setAttribute("aria-pressed",String(active))});
  if(view==="lesson"){lesson();$("#lesson").focus()}
  if(view==="practice")$("#stage").focus()
- tabs();scrollTo(0,0);
+ tabs();practiceSummary();scrollTo(0,0);
 }
 function go(t,l=S.lv){const hash=Navigation.hash(t,l,DATA);if(location.hash===hash)applyRoute();else location.hash=hash}
 const pick=l=>go("lesson",+l);
@@ -77,5 +82,9 @@ addEventListener("keydown",e=>{if(!Navigation.capturesKey(e,view))return;e.preve
  let l=e.code[3].toLowerCase();if(e.shiftKey&&SH[l.toUpperCase()])l=l.toUpperCase();press(l)});
 
 $("#lesson").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.hasAttribute("data-back"))go("learn");if(b.hasAttribute("data-practice"))go("practice",lessonLevel);if(b.dataset.audio){const x=DATA.flatMap(l=>l.items).find(x=>x.id===b.dataset.audio);if(x)speak(x.ko)}};
-addEventListener("hashchange",applyRoute);paint();applyRoute();
+addEventListener("hashchange",applyRoute);
+addEventListener("focus",practiceSummary);
+addEventListener("visibilitychange",()=>{if(!document.hidden)practiceSummary()});
+addEventListener("storage",e=>{if(e.key===Metrics.KEY||e.key===null)practiceSummary()});
+paint();applyRoute();
 })();

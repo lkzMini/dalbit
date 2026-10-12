@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>한글 0→Hero</title>
+<title>Dalbit · 달빛</title>
 <link rel="stylesheet" href="styles.css">
 </head><body>
-<header><div class="hd"><div class="logo"><i>한</i>한글 0→Hero</div>
+<header><div class="hd"><div class="logo"><i>달</i>Dalbit · 달빛</div>
 <nav class="pill"><button data-t="learn" class="on" data-i="learn"></button><button data-t="practice" data-i="practice"></button></nav>
 <div class="bar"><button class="ib" id="lang" title="Idioma / Language"></button><button class="ib" id="th" title="Tema / Theme"></button></div></div></header>
 <main>
 <section id="learn">
 <div class="hero"><div><h2 data-i="hT"></h2><p data-i="hP"></p><button class="cta" id="go" data-i="cta"></button></div>
 <div><button class="syl go" id="syl" type="button" aria-label="ㅎ + ㅏ + ㄴ = 한"><i class="s1">ㅎ</i><i class="s2">ㅏ</i><i class="s3">ㄴ</i></button><p class="mu cap">ㅎ + ㅏ + ㄴ = 한 · han<br><span data-i="tap"></span></p></div></div>
+<div class="card" id="practice-summary" aria-label="Tu práctica / Your practice"></div>
 <h3 data-i="road"></h3><div id="road"></div>
 <h3 data-i="alpha"></h3><div class="seg" id="seg"><button class="on" data-a="V" data-i="vow"></button><button data-a="C" data-i="con"></button></div>
 <div class="grid" id="G"></div><p class="mu" data-i="keyH"></p>
@@ -31,6 +32,7 @@
 <script defer src="js/engine.js"></script>
 <script defer src="js/progress.js"></script>
 <script defer src="js/navigation.js"></script>
+<script defer src="js/metrics.js"></script>
 <script defer src="js/app.js"></script>
 
 </body></html>
